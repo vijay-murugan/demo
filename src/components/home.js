@@ -28,14 +28,70 @@ const URLImage = ({ image }) => {
     );
   };
 
+  let inputVal 
+
+//   const getInputValue = () => {
+//     // Selecting the input element and get its value 
+//      if (inputVal != null)
+//     //   inputVal = document.getElementById("myInput").value;
+//      document.getElementById("myInput").addEventListener("click",()=>{
+//       let inputVal = document.getElementById("myInput").value;
+//     });
+//     // Displaying the value
+//     console.log(inputVal);
+// }
+
+
+
 const Home = () => {
-    let navigate = useNavigate();
-    const handleClick = () => {
-        navigate('/')
-    }
+
+    const dragUrl = React.useRef();
+    const stageRef = React.useRef();
+    const [images, setImages] = React.useState([]);
     return (
         <div>
-            <input type = 'text' size = "50"/>
+
+            <input type="text" placeholder="Type something..." id="myInput"/>
+            <button type="button" >Get Value</button>
+
+            <img
+        alt="lion"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdUddietosCBEXfZsTc5WJYBMzVd0Gr88PmyKtcRJlNV0JovU&s"
+        draggable="true"
+        onDragStart={(e) => {
+          dragUrl.current = e.target.src;
+        }}
+      />
+      <div
+        onDrop={(e) => {
+          e.preventDefault();
+          // register event position
+          stageRef.current.setPointersPositions(e);
+          // add image
+          setImages(
+            images.concat([
+              {
+                ...stageRef.current.getPointerPosition(),
+                src: dragUrl.current,
+              },
+            ])
+          );
+        }}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <Stage
+          width={window.innerWidth}
+          height={window.innerHeight}
+          style={{ border: '1px solid grey' }}
+          ref={stageRef}
+        >
+          <Layer>
+            {images.map((image) => {
+              return <URLImage image={image} />;
+            })}
+          </Layer>
+        </Stage>
+      </div>
         </div>
         
     )
