@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from 'react'
 import { render } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 // import html from './home.html'
@@ -21,42 +22,29 @@ const URLImage = ({ image }) => {
         image={img}
         x={image.x}
         y={image.y}
-        // I will use offset to set origin to the center of the image
         offsetX={img ? img.width / 2 : 0}
         offsetY={img ? img.height / 2 : 0}
       />
     );
   };
 
-  let inputVal 
 
-//   const getInputValue = () => {
-//     // Selecting the input element and get its value 
-//      if (inputVal != null)
-//     //   inputVal = document.getElementById("myInput").value;
-//      document.getElementById("myInput").addEventListener("click",()=>{
-//       let inputVal = document.getElementById("myInput").value;
-//     });
-//     // Displaying the value
-//     console.log(inputVal);
-// }
-
+  
 
 
 const Home = () => {
-
+    const [name, setName] = useState('');
     const dragUrl = React.useRef();
     const stageRef = React.useRef();
     const [images, setImages] = React.useState([]);
     return (
         <div>
-
-            <input type="text" placeholder="Type something..." id="myInput"/>
-            <button type="button" >Get Value</button>
-
-            <img
-        alt="lion"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdUddietosCBEXfZsTc5WJYBMzVd0Gr88PmyKtcRJlNV0JovU&s"
+            <textarea autoComplete="off"  rows="4" cols="150"
+             placeholder="Drag and drop the image here and clear each time before dropping new image" id="myInput"
+           name="name"
+           onChange={event => setName(event.target.value)}/>
+           <img
+        src={name}
         draggable="true"
         onDragStart={(e) => {
           dragUrl.current = e.target.src;
