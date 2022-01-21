@@ -1,5 +1,5 @@
 import Login from './components/login'
-import Home from './components/home'
+import HomePage from './canvas/HomePage'
 import './App.css';
 import {Container} from 'react-bootstrap';
 import {
@@ -16,10 +16,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+          
           <Route  path="/" element = {<Login/>}> 
           </Route>
-          <Route path="/home" element = {<Home/>}> 
+          <Route path="/home" element = {<HomePage/>}> 
           </Route>
+
         </Routes>
 
         </BrowserRouter>
