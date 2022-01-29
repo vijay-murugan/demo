@@ -26,7 +26,7 @@ export const addTextNode = (stage, layer) => {
     if (!this.clickStartShape) {
       return;
     }
-    if (e.target._id == this.clickStartShape._id) {
+    if (e.target._id === this.clickStartShape._id) {
       layer.add(tr);
       tr.attachTo(e.target);
       layer.draw();

@@ -8,7 +8,7 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
       // we need to attach transformer manually
       trRef.current.setNode(shapeRef.current);
       trRef.current.getLayer().batchDraw();
-    }
+    }   
   }, [isSelected]);
   return (
     <React.Fragment>
